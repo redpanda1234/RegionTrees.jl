@@ -4,6 +4,8 @@ mutable struct Cell{Data, N, T, L}
     divisions::SVector{N, T}
     children::Union{TwosArray{N, Cell{Data, N, T, L}, L}, Nothing}
     parent::Union{Cell{Data, N, T, L}, Nothing}
+    leaves::Union{Set{Cell{Data, N, T, L}}, Nothing}
+    ancestors::Union{Dict{Int64, Cell{Data, N, T, L}}, Nothing}
 end
 
 function Cell(origin::SVector{N, T}, widths::SVector{N, T}, data::Data=nothing) where {Data, N, T}
@@ -18,6 +20,8 @@ end
              data,
              boundary.origin + boundary.widths / 2,
              nothing,
+             nothing,
+             nothing,
              nothing)
     end
 end
@@ -25,6 +29,7 @@ end
 @inline isleaf(cell::Cell) = cell.children === nothing
 @inline children(cell::Cell) = cell.children
 @inline parent(cell::Cell) = cell.parent
+@inline leaves(cell::Cell) = cell.leaves
 @inline center(cell::Cell) = center(cell.boundary)
 @inline vertices(cell::Cell) = vertices(cell.boundary)
 
