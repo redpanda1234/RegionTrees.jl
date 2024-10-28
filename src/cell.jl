@@ -4,9 +4,12 @@ mutable struct Cell{Data, N, T, L}
     divisions::SVector{N, T}
     children::Union{TwosArray{N, Cell{Data, N, T, L}, L}, Nothing}
     parent::Union{Cell{Data, N, T, L}, Nothing}
-    leaves::Union{Set{Cell{Data, N, T, L}}, Nothing}
+    leaves::Union{Set{Int64}, Nothing}
     ancestors::Union{Dict{Int64, Cell{Data, N, T, L}}, Nothing}
+    diam::Union{Float64, Nothing}
+    index::Union{Int64, Nothing}
 end
+
 
 function Cell(origin::SVector{N, T}, widths::SVector{N, T}, data::Data=nothing) where {Data, N, T}
     Cell(HyperRectangle(origin, widths), data)
@@ -22,6 +25,8 @@ end
              nothing,
              nothing,
              nothing,
+             nothing,
+             norm(boundary.widths),
              nothing)
     end
 end
