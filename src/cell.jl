@@ -4,8 +4,8 @@ mutable struct Cell{Data, N, T, L}
     divisions::SVector{N, T}
     children::Union{TwosArray{N, Cell{Data, N, T, L}, L}, Nothing}
     parent::Union{Cell{Data, N, T, L}, Nothing}
-    leaves::Union{Set{Int64}, Nothing}
-    ancestors::Union{Dict{Int64, Cell{Data, N, T, L}}, Nothing}
+    # leaves::Union{Set{Int64}, Nothing}
+    # ancestors::Union{Dict{Int64, Cell{Data, N, T, L}}, Nothing}
     diam::Union{Float64, Nothing}
     index::Union{Int64, Nothing}
 end
@@ -24,8 +24,8 @@ end
              boundary.origin + boundary.widths / 2,
              nothing,
              nothing,
-             nothing,
-             nothing,
+             # nothing,
+             # nothing,
              norm(boundary.widths),
              nothing)
     end
