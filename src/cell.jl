@@ -7,7 +7,7 @@ mutable struct Cell{Data, N, T, L}
     # leaves::Union{Set{Int64}, Nothing}
     # ancestors::Union{Dict{Int64, Cell{Data, N, T, L}}, Nothing}
     diam::Union{Float64, Nothing}
-    index::Union{Int64, Nothing}
+    index::Union{S, Nothing} where S <: Int
 end
 
 
